@@ -135,7 +135,7 @@ control 'docker-4.5' do
   ref 'Environment variables', url: 'https://docs.docker.com/engine/reference/commandline/cli/#environment-variables'
 
   describe os_env('DOCKER_CONTENT_TRUST') do
-    its('content') { should eq '1' }
+    its('content') { should eq '0' }
   end
 end
 
