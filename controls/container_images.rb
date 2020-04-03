@@ -54,29 +54,6 @@ control 'docker-4.1' do
   end
 end
 
-control 'docker-4.2' do
-  impact 1.0
-  title 'Use trusted base images for containers'
-  desc 'Ensure that the container image is written either from scratch or is based on another established and trusted base image downloaded over a secure channel.
-
-  Rationale: Official repositories are Docker images curated and optimized by the Docker community or the vendor. There could be other potentially unsafe public repositories. You should thus exercise a lot of caution when obtaining container images.'
-
-  tag 'docker'
-  tag 'cis-docker-1.12.0': '4.2'
-  tag 'cis-docker-1.13.0': '4.2'
-  tag 'level:1'
-  ref 'Docker Image Insecurity', url: 'https://titanous.com/posts/docker-insecurity'
-  ref 'Docker Hub', url: 'https://hub.docker.com/'
-  ref 'Docker 1.3: signed images, process injection, security options, Mac shared directories', url: 'https://blog.docker.com/2014/10/docker-1-3-signed-images-process-injection-security-options-mac-shared-directories/'
-  ref 'Proposal: Provenance step 1 - Transform images for validation and verification', url: 'https://github.com/docker/docker/issues/8093'
-  ref 'Use the Docker command line', url: 'https://docs.docker.com/engine/reference/commandline/cli/'
-  ref 'Add support for referring to images by digest', url: 'https://github.com/docker/docker/pull/11109'
-  ref 'Announcing Docker Trusted Registry 1.4 – New User Interface, Integrated Content Trust and Support for Docker Engine 1.9', url: 'https://blog.docker.com/2015/11/docker-trusted-registry-1-4/'
-
-  describe os_env('DOCKER_CONTENT_TRUST') do
-    its('content') { should eq '1' }
-  end
-end
 
 control 'docker-4.3' do
   impact 1.0
@@ -119,25 +96,6 @@ control 'docker-4.4' do
   end
 end
 
-control 'docker-4.5' do
-  impact 1.0
-  title 'Enable Content trust for Docker'
-  desc 'Content trust is disabled by default. You should enable it.
-
-  Rationale: Content trust provides the ability to use digital signatures for data sent to and received from remote Docker registries. These signatures allow client-side verification of the integrity and publisher of specific image tags. This ensures provenance of container images.'
-
-  tag 'docker'
-  tag 'cis-docker-1.12.0': '4.5'
-  tag 'cis-docker-1.13.0': '4.5'
-  tag 'level:2'
-  ref 'Content trust in Docker', url: 'https://docs.docker.com/engine/security/trust/content_trust/'
-  ref 'Notary', url: 'https://docs.docker.com/engine/reference/commandline/cli/#notary'
-  ref 'Environment variables', url: 'https://docs.docker.com/engine/reference/commandline/cli/#environment-variables'
-
-  describe os_env('DOCKER_CONTENT_TRUST') do
-    its('content') { should eq '0' }
-  end
-end
 
 control 'docker-4.6' do
   impact 0.0
